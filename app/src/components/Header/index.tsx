@@ -5,14 +5,34 @@ export const Header = () => {
     <HeaderStyle>
       <h1>Juventude livres</h1>
       <div className="rol">
-        <div>
-          <p>
-            — Nossos cultos — Todos os <span>Sábados</span> — 19:00 — Auditório
-            da <span>primeira igreja batista</span> de imperatriz — Nossos
-            cultos — Todos os <span>Sábados</span> — 19:00 — Auditório da{" "}
-            <span>primeira igreja batista</span> de imperatriz — 
-          </p>
-        </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
+          <div>
+            <strong>Todos os Sabados </strong> — Na Primeira Igreja Batista De Imperatriz -{" "}
+            <strong>19:00</strong> — 2024 —
+          </div>
       </div>
     </HeaderStyle>
   );

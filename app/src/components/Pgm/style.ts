@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const PgmStyle = styled.section`
   width: 98vw;
   max-width: 62.5rem;
-  height: 100vh;
   @media (max-width: 800px) {
     height: 100%;
   }

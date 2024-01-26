@@ -1,9 +1,13 @@
 import { LineStyle } from "./style"
 
-export const Line = () => {
+interface ILine {
+    name?: string
+}
+
+export const Line = ({name}:ILine) => {
     return(
         <LineStyle>
-            <p>Atividade</p>
+            <p>{name}</p>
             <div></div>
         </LineStyle>
     )

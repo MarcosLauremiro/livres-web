@@ -25,16 +25,13 @@ export const HeaderStyle = styled.header`
   }
 
   .rol {
+    white-space: nowrap;
     div {
-      overflow: hidden; /* Adicionando overflow hidden para evitar que a div ultrapasse */
-      white-space: nowrap;
-      animation: scroll 30s linear infinite;
-    }
-    p {
-      width: 100%;
-      font-size: 1.5rem;
-      span {
-        font-weight: 600;
+      display: inline-block;
+      animation: scroll 20s linear infinite;
+      padding-right: 20px;
+      strong{
+        font-weight: 500;
       }
     }
   }

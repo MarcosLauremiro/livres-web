@@ -1,6 +1,7 @@
 import { Card } from "./Cards";
 import { MinisteryStyle } from "./style";
 import livres from "../../assets/GersonMilitao-6.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 export const Ministery = () => {
   return (
@@ -31,7 +32,7 @@ export const Ministery = () => {
         />
       </div>
       <p>
-        Lorem, ipsum doque cum qui laborum <a href="">sint</a>.
+      Confira todos nossos ministérios <a href=""><FaArrowRight /> Ver Ministerios</a>.
       </p>
     </MinisteryStyle>
   );

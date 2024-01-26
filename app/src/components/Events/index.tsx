@@ -1,6 +1,7 @@
 import { Card } from "./Card";
 import { EventStyle } from "./style";
-import confetence from "../../assets/louvor.jpg"
+import confetence from "../../assets/louvor.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 export const Events = () => {
   return (
@@ -27,7 +28,11 @@ export const Events = () => {
         />
       </div>
       <p>
-        Lorem, ipsum doque cum qui laborum <a href="">sint</a>.
+        Confira todos nossos eventos deste ano{" "}
+        <a href="">
+          <FaArrowRight /> Ver Eventos
+        </a>
+        .
       </p>
     </EventStyle>
   );

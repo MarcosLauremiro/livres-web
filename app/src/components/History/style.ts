@@ -4,7 +4,6 @@ import liders from "../../assets/liders.jpg";
 export const HistoryStyle = styled.section`
   width: 98vw;
   max-width: 62.5rem;
-  height: 100vh;
   span {
     font-size: 0.9rem;
     font-weight: 300;

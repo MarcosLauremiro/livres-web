@@ -1,6 +1,7 @@
 import { Card } from "./Cards";
 import { PgmStyle } from "./style";
 import livres from "../../assets/GersonMilitao-6.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 export const Pgm = () => {
   return (
@@ -16,7 +17,7 @@ export const Pgm = () => {
         <Card title="Wey - PGM de jovens Casados" img={livres} />
       </div>
       <p>
-        Lorem, ipsum doque cum qui laborum <a href="">sint</a>.
+        Confira todos nossos pequenos grupos <a href=""><FaArrowRight /> Ver PGM's</a>.
       </p>
     </PgmStyle>
   );
