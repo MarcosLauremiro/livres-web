@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const MinisteryStyle = styled.section`
   width: 98vw;
   max-width: 62.5rem;
+  margin-top: 3rem;
   @media (max-width: 800px) {
       height: 100%;
   }

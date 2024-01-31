@@ -4,6 +4,7 @@ export const FooterStyle = styled.footer`
   width: 98vw;
   max-width: 62.5rem;
   border-top: solid 1px #a3a3a3;
+  margin-top: 3rem;
   .container {
     margin-top: 1rem;
     display: flex;
@@ -15,17 +16,17 @@ export const FooterStyle = styled.footer`
       }
     }
     .redes {
-        display: flex;
-        gap: 12px;
+      display: flex;
+      gap: 12px;
       a {
         text-decoration: none;
         color: black;
-        font-size: .9rem;
+        font-size: 0.9rem;
         &:hover {
-        transition: 3s;
-        text-decoration: underline;
-        cursor: pointer;
-      }
+          transition: 3s;
+          text-decoration: underline;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -35,8 +36,8 @@ export const FooterStyle = styled.footer`
     justify-content: center;
     margin: 3rem;
     p {
-        opacity: .9;
-        font-weight: 500;
+      opacity: 0.9;
+      font-weight: 500;
     }
   }
 `;

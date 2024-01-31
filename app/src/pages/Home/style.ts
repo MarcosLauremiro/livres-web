@@ -5,9 +5,9 @@ export const HomeStyle = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
 
   font-family: "Poppins", sans-serif;
 
   background-color: ${(props) => props.theme.colors.bc};
+
 `;

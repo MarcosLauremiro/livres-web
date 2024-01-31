@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const EventStyle = styled.section`
-   width: 98vw;
+  width: 98vw;
   max-width: 62.5rem;
+  margin-top: 3rem;
   @media (max-width: 800px) {
-      height: 100%;
+    height: 100%;
   }
 
   display: flex;
@@ -35,7 +36,7 @@ export const EventStyle = styled.section`
       width: 70%;
     }
   }
-  .card-event{
+  .card-event {
     display: flex;
     align-items: center;
     justify-content: space-between;
