@@ -18,6 +18,7 @@ model User {
   phone String
   age String
   address Address?
+  isAdmin Boolean
 }
 
 model Address {

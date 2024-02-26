@@ -8,6 +8,7 @@ export class User {
   phone: string;
   age: string;
   register_at: Date;
+  isAdmin: boolean;
 
   @Exclude()
   password: string;
