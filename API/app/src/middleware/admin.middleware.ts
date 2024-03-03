@@ -1,14 +1,11 @@
 import { JwtService } from '@nestjs/jwt';
-import { JwtStrategy } from './../module/auth/jwt.strategy';
 import {
   Injectable,
   NestMiddleware,
   UnauthorizedException,
 } from '@nestjs/common';
-import { IsJWT } from 'class-validator';
 import { PrismaService } from 'database/prisma.service';
 import { Request, Response, NextFunction } from 'express';
-import { JwtAuthGuard } from 'src/module/auth/jwt-auth.guard';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -27,7 +24,7 @@ export class AuthMiddleware implements NestMiddleware {
       const decodedToken = this.jwtService.decode(token.split(' ')[1]);
 
       const user = await this.prisma.user.findUnique({
-        where: { id: decodedToken },
+        where: { id: decodedToken.sub },
       });
 
       if (!user || !user.isAdmin) {
@@ -37,7 +34,7 @@ export class AuthMiddleware implements NestMiddleware {
       }
       next();
     } catch (error) {
-      throw new UnauthorizedException('Invalid token.');
+      throw new UnauthorizedException('Invalid token não ta funcionando.');
     }
   }
 }

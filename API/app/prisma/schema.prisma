@@ -19,6 +19,7 @@ model User {
   age String
   address Address?
   isAdmin Boolean
+  register_at DateTime
 }
 
 model Address {
