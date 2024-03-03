@@ -26,9 +26,44 @@ export const LoginStyle = styled.div`
       height: 100%;
       width: 100%;
       border-radius: 15px 0  0 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h1{
+      font-size: 1.5rem;
+      padding: 1rem;
+      font-weight: 500;
     }
+    .img{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p{
+      padding: 1rem;
+      span{
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+    }
+
     .side-right{
       border-radius: 0 15px 15px 0;
+      .header_container{
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        h1{
+          font-weight: 600;
+        }
+        button{
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
+      }
     }
   }
 `;
