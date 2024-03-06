@@ -1,7 +1,8 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { LoginFormValue } from "../pages/Login/LoginShema";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
+import { GlobalContext } from "./GlobalContext";
 
 interface IAuthContextProps{
     children: React.ReactNode
@@ -14,6 +15,8 @@ interface IAuthContext{
 export const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({children}: IAuthContextProps) => {
+
+    const { setLoginModal } = useContext(GlobalContext);
 
     const singIn = async (data: LoginFormValue) => {
         try{
@@ -38,7 +41,8 @@ export const AuthProvider = ({children}: IAuthContextProps) => {
                 theme: "light",
               });
               setTimeout(() => {
-              }, 1000)
+                setLoginModal(false)
+              }, 500)
         }catch(error){
             toast.error("Não foi possível realizar o login", {
                 position: "top-right",

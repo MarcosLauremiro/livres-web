@@ -7,7 +7,7 @@ export const loginShema = z.object({
     .email(),
     password: z
     .string()
-    .min(6, { message: "Sua senha pecisa ter no minimo 6 digitos" }),
+    .min(4, { message: "Sua senha pecisa ter no minimo 6 digitos" }),
 });
 
 export type LoginFormValue = z.infer<typeof loginShema>;
