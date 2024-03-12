@@ -1,23 +1,30 @@
+import { Input } from "../../components/input";
 import { RegisterStyle } from "./style";
-import manutenção from "../../assets/manutenção.svg";
-import { FaHome } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate();
   return (
     <RegisterStyle>
-      <h1>Estamos em Obras</h1>
-      <span>
-        fique ligado em nossas redes para ficar por dentro de todas as
-        atualizaçãoes
-      </span>
-      <div>
-        <img src={manutenção} alt="home" />
-      </div>
-      <button onClick={() => navigate("/")}>
-        <FaHome size={30} />
-      </button>
+       <form>
+        <div className="form-container">
+          <h1>Log in</h1>
+          <Input placeholder="Nome Completo" type="text"></Input>
+          <Input placeholder="Data de Nascimento" type="date"></Input>
+          <Input placeholder="Email" type="email"></Input>
+          <Input placeholder="Telefone" type="tel"></Input>
+          <Input placeholder="Senha" type="password"></Input>
+          <Input placeholder="Repita a Senha" type="password"></Input>
+          <div className="conect">
+            <input type="checkbox" placeholder="manter conectado"></input> 
+            <p>Manter conectado</p>
+          </div>
+          <div className="buttons">
+            <button className="register">Registre-se</button>
+            <button className="login">Log in</button>
+          </div>
+        </div>
+      </form>
     </RegisterStyle>
   );
 };

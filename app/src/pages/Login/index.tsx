@@ -25,9 +25,13 @@ export const Login = () => {
           <h1>Log in</h1>
           <Input {...register("email")} placeholder="Email"></Input>
           <Input {...register("password")} placeholder="Senha"></Input>
+          <div className="conect">
+            <input type="checkbox" placeholder="manter conectado"></input> 
+            <p>Manter conectado</p>
+          </div>
           <div className="button-login">
-            <button>Fazer Log in</button>
-            <button>Registre-se</button>
+            <button className="login">Fazer Log in</button>
+            <button className="register">Registre-se</button>
           </div>
         </div>
       </form>

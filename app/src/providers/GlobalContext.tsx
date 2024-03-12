@@ -5,18 +5,18 @@ interface IGlobalContextProps{
 }
 
 interface IGlobalContext{
-    loginModal: boolean
-    setLoginModal: React.Dispatch<React.SetStateAction<boolean>>
+    login: boolean
+    setLogin: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const GlobalContext = createContext({} as IGlobalContext);
 
 export const GlobalProvider = ({children}: IGlobalContextProps) => {
     // ...variaveis
-    const [loginModal, setLoginModal] = useState(false)
+    const [login, setLogin] = useState(false)
 
     return(
-        <GlobalContext.Provider value={{loginModal, setLoginModal}}>
+        <GlobalContext.Provider value={{login, setLogin}}>
             {children}
         </GlobalContext.Provider>
     )
