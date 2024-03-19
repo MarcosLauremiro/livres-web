@@ -50,7 +50,10 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      include: {address: true},
     });
+
+    return plainToInstance(User, user);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

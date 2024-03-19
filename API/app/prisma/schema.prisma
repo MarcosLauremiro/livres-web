@@ -11,23 +11,24 @@ datasource db {
 }
 
 model User {
-  id String @id
-  name String
-  email String
-  password String
-  phone String
-  age String
-  address Address?
-  isAdmin Boolean
+  id          String   @id
+  name        String
+  email       String
+  password    String
+  phone       String
+  age         String
+  address     Address?
+  isAdmin     Boolean
   register_at DateTime
 }
 
 model Address {
-  id String @id
-  road String
+  id           String @id
+  road         String
   neighborhood String
-  number String
-  complement String
-  user User @relation(fields: [userId], references: [id])
-  userId String @unique
+  number       String
+  complement   String
+  user         User   @relation(fields: [userId], references: [id])
+  userId       String @unique
+  register_at DateTime
 }

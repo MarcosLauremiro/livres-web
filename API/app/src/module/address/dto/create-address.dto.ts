@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateAddressDto {
   @ApiProperty()
@@ -23,6 +23,10 @@ export class CreateAddressDto {
   userId: string;
 
   @ApiProperty()
-  @IsDate()
   register_at: Date;
+
+  constructor(partial: Partial<CreateAddressDto>) {
+    Object.assign(this, partial);
+    this.register_at = new Date();
+  }
 }
