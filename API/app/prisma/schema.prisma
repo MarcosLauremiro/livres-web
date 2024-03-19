@@ -23,12 +23,33 @@ model User {
 }
 
 model Address {
-  id           String @id
+  id           String   @id
   road         String
   neighborhood String
   number       String
   complement   String
-  user         User   @relation(fields: [userId], references: [id])
-  userId       String @unique
-  register_at DateTime
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       String   @unique
+  register_at  DateTime
+  pgm          Pgm?     @relation(fields: [pgmId], references: [id])
+  pgmId        String   @unique
+  event        Event?   @relation(fields: [eventId], references: [id])
+  eventId      String   @unique
+}
+
+model Pgm {
+  id          String   @id
+  name        String
+  description String
+  time        String
+  location    String
+  address     Address?
+}
+
+model Event {
+  id       String   @id
+  name     String
+  date     String
+  location String
+  address  Address?
 }
