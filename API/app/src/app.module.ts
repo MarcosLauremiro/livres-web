@@ -10,9 +10,10 @@ import { AddressModule } from './module/address/address.module';
 import { AuthMiddleware } from './middleware/admin.middleware';
 import { PrismaService } from 'database/prisma.service';
 import { JwtService } from '@nestjs/jwt';
+import { PgmModule } from './module/pgm/pgm.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, AddressModule],
+  imports: [UsersModule, AuthModule, AddressModule, PgmModule],
   controllers: [],
   providers: [PrismaService,JwtService],
 })
