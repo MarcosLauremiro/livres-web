@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
 import { hashSync } from "bcryptjs";
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -18,11 +18,12 @@ export class CreateUserDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  @Matches(/^(\+\d{2}\s?)?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{4}$/)
   phone: string;
 
   @ApiProperty()
   @IsString()
-  age: string;
+  date_birth: string;
 
   @ApiProperty()
   register_at: Date;
@@ -30,6 +31,14 @@ export class CreateUserDto {
   @IsBoolean()
   @ApiProperty()
   isAdmin: boolean;
+
+  @IsBoolean()
+  @ApiProperty()
+  marital_status: boolean
+
+  @ApiProperty()
+  @IsString()
+  instagram: string
 
   @ApiProperty()
   @IsString()
