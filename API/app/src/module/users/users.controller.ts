@@ -12,18 +12,22 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({ summary: 'Criar um novo usuário' })
+  @ApiResponse({ status: 201, description: 'Usuário criado com sucesso' })
+  @ApiResponse({ status: 400, description: 'Requisição inválida' })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiOperation({ summary: 'Obter todos os usuários' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -31,6 +35,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @ApiOperation({ summary: 'Obter usuário por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -38,6 +43,7 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Obter usuário por e-mail' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':email')
@@ -45,6 +51,7 @@ export class UsersController {
     return this.usersService.findByEmail(email);
   }
 
+  @ApiOperation({ summary: 'Atualizar usuário por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
@@ -52,6 +59,7 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @ApiOperation({ summary: 'Excluir usuário por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

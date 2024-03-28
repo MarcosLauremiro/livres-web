@@ -32,7 +32,9 @@ export class UsersService {
   }
 
   async findAll() {
-    const findUser = await this.prisma.user.findMany();
+    const findUser = await this.prisma.user.findMany({
+      include: { address: true, pgm: true },
+    });
     return plainToInstance(User, findUser);
   }
 
@@ -50,7 +52,7 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
-      include: {address: true},
+      include: { address: true, pgm: true },
     });
 
     return plainToInstance(User, user);

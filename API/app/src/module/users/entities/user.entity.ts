@@ -6,9 +6,17 @@ export class User {
   name: string;
   email: string;
   phone: string;
-  age: string;
+  date_birth: string;
   register_at: Date;
   isAdmin: boolean;
+  status:boolean
+  marital_status:boolean
+  instagram: string;
+  university: boolean;
+  work: boolean;
+  baptism: boolean;
+  start_date: string;
+  
 
   @Exclude()
   password: string;

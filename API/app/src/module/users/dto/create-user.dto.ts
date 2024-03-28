@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
 import { hashSync } from "bcryptjs";
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -34,11 +34,39 @@ export class CreateUserDto {
 
   @IsBoolean()
   @ApiProperty()
+  status: boolean
+
+  @IsBoolean()
+  @ApiProperty()
   marital_status: boolean
 
   @ApiProperty()
   @IsString()
   instagram: string
+
+  @ApiProperty()
+  @IsBoolean()
+  university: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  work: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  baptism: boolean;
+
+  @ApiProperty()
+  @IsString()
+  start_date: string;
+
+  @ApiProperty()
+  @IsOptional()
+  pgmId?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  ministryId?: string;
 
   @ApiProperty()
   @IsString()

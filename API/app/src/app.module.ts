@@ -11,9 +11,12 @@ import { AuthMiddleware } from './middleware/admin.middleware';
 import { PrismaService } from 'database/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { PgmModule } from './module/pgm/pgm.module';
+import { EventModule } from './module/event/event.module';
+import { ScheduleModule } from './module/schedule/schedule.module';
+import { MinistryModule } from './module/ministry/ministry.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, AddressModule, PgmModule],
+  imports: [UsersModule, AuthModule, AddressModule, PgmModule, EventModule, ScheduleModule, MinistryModule],
   controllers: [],
   providers: [PrismaService,JwtService],
 })

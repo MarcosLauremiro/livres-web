@@ -22,11 +22,7 @@ export class CreateAddressDto {
   @IsString()
   userId: string;
 
-  @ApiProperty()
-  register_at: Date;
-
   constructor(partial: Partial<CreateAddressDto>) {
     Object.assign(this, partial);
-    this.register_at = new Date();
   }
 }

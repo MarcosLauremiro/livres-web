@@ -11,48 +11,84 @@ datasource db {
 }
 
 model User {
-  id             String   @id
+  id             String    @id
   name           String
-  email          String
+  email          String    @unique
   password       String
   phone          String
   date_birth     String
-  isAdmin        Boolean
-  register_at    DateTime
-  status         Boolean
-  marital_status String
+  isAdmin        Boolean   @default(false)
+  register_at    DateTime  @default(now())
+  status         Boolean   @default(true)
+  marital_status Boolean   @default(false)
   address        Address?
   instagram      String
+  university     Boolean
+  work           Boolean
+  baptism        Boolean
+  start_date     String
+  pgm            Pgm?      @relation("members", fields: [pgmId], references: [id])
+  pgmId          String?
+  leader_pgm     Pgm?      @relation("pgm_leader")
+  ministy        Ministry? @relation("members_ministry", fields: [ministryId], references: [id])
+  ministryId     String?
+  Ministry       Ministry? @relation("ministry_leader")
 }
 
 model Address {
-  id           String   @id
+  id           String    @id
   road         String
   neighborhood String
   number       String
   complement   String
   register_at  DateTime
-  pgm          Pgm?     @relation(fields: [pgmId], references: [id])
-  pgmId        String   @unique
-  event        Event?   @relation(fields: [eventId], references: [id])
-  eventId      String   @unique
-  user         User?    @relation(fields: [userId], references: [id])
-  userId       String   @unique
+  pgm          Pgm?      @relation(fields: [pgmId], references: [id])
+  pgmId        String?   @unique
+  event        Event?    @relation(fields: [eventId], references: [id])
+  eventId      String?   @unique
+  user         User?     @relation(fields: [userId], references: [id])
+  userId       String?   @unique
+  schendule    Schedule? @relation(fields: [scheduleId], references: [id])
+  scheduleId   String?   @unique
 }
 
 model Pgm {
   id          String   @id
-  name        String
+  title       String
   description String
   time        String
   location    String
   address     Address?
+  members     User[]   @relation("members")
+  user        User     @relation("pgm_leader", fields: [userId], references: [id])
+  userId      String   @unique
 }
 
 model Event {
-  id       String   @id
-  name     String
-  date     String
-  location String
-  address  Address?
+  id          String   @id
+  title       String
+  description String
+  date        String
+  location    String
+  address     Address?
+}
+
+model Schedule {
+  id              String   @id
+  title           String
+  description     String
+  hour            String
+  localization    String
+  date            String
+  target_audience String
+  address         Address?
+}
+
+model Ministry {
+  id          String @id
+  title       String
+  description String
+  members     User[] @relation("members_ministry")
+  leader      User   @relation("ministry_leader", fields: [userId], references: [id])
+  userId      String @unique
 }

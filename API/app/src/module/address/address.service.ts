@@ -30,7 +30,12 @@ export class AddressService {
       throw new NotFoundException('addres not found');
     }
 
-    return address
+    return address;
+  }
+
+  async findAll() {
+    const address = await this.prisma.address.findMany();
+    return address;
   }
 
   async update(id: string, updateAddressDto: UpdateAddressDto) {
