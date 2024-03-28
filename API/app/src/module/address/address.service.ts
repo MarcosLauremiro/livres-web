@@ -51,7 +51,8 @@ export class AddressService {
       where: { id },
       data: { ...updateAddressDto },
     });
-    return `This action updates a #${id} address`;
+    
+    return updateAddress;
   }
 
   async remove(id: string) {

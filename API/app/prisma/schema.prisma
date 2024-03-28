@@ -59,8 +59,8 @@ model Pgm {
   time        String
   location    String
   address     Address?
-  members     User[]   @relation("members")
-  user        User     @relation("pgm_leader", fields: [userId], references: [id])
+  members     User[]  @relation("members")
+  user        User    @relation("pgm_leader", fields: [userId], references: [id])
   userId      String   @unique
 }
 
