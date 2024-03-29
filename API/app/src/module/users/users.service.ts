@@ -62,7 +62,7 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({
       where: { id },
     });
-    if (user) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
     const updateUser = await this.prisma.user.update({

@@ -27,6 +27,7 @@ export class PgmService {
   async findOne(id: string) {
     const pgm = await this.prisma.pgm.findUnique({
       where: { id },
+      include: {address: true, user: true}
     });
 
     if (!pgm) {
@@ -65,3 +66,4 @@ export class PgmService {
     await this.prisma.pgm.delete({ where: { id } });
   }
 }
+
