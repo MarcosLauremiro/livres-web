@@ -1,4 +1,5 @@
-import { Address } from './../../address/entities/address.entity';
+import { randomUUID } from 'crypto';
+
 export class Event {
   id: string;
   title: string;
@@ -7,5 +8,8 @@ export class Event {
   location: string;
   inscription: boolean;
   status: boolean;
-  Address: string;
+  
+  constructor() {
+    this.id = randomUUID();
+  }
 }
