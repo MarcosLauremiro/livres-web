@@ -15,21 +15,25 @@ export class ScheduleController {
     return this.scheduleService.create(createScheduleDto);
   }
 
+  @ApiOperation({ summary: 'Obter todos os schedule' })
   @Get()
   findAll() {
     return this.scheduleService.findAll();
   }
 
+  @ApiOperation({ summary: 'Obter schedule por ID' })
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.scheduleService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Atualizar schedule por ID' })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateScheduleDto: UpdateScheduleDto) {
     return this.scheduleService.update(id, updateScheduleDto);
   }
 
+  @ApiOperation({ summary: 'Excluir schedule por ID' })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.scheduleService.remove(id);
