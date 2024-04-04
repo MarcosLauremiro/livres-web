@@ -24,7 +24,15 @@ export class AddressController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createAddressDto: CreateAddressDto, @Request() req) {
-    return this.addressService.create(createAddressDto, req.user.id);
+    const { userId, eventId, pgmId, scheduleId } = req.body;
+    console.log("log ======================>", req.body)
+    return this.addressService.create(
+      createAddressDto,
+      userId,
+      eventId,
+      pgmId,
+      scheduleId,
+    );
   }
 
   @ApiBearerAuth()

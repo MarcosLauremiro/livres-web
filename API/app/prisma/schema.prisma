@@ -48,7 +48,7 @@ model Address {
   eventId      String?   @unique
   user         User?     @relation(fields: [userId], references: [id])
   userId       String?   @unique
-  schendule    Schedule? @relation(fields: [scheduleId], references: [id])
+  schedule    Schedule? @relation(fields: [scheduleId], references: [id])
   scheduleId   String?   @unique
 }
 

@@ -6,7 +6,10 @@ export class Address {
   neighborhood: string;
   number: string;
   complement: string;
-  userId: string;
+  user?: string;
+  pgm?: string;
+  event?: string;
+  schedule?: string;
   register_at: Date;
 
   constructor() {

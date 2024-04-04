@@ -18,10 +18,6 @@ export class CreateAddressDto {
   @IsString()
   complement: string;
 
-  @ApiProperty()
-  @IsString()
-  userId: string;
-
   constructor(partial: Partial<CreateAddressDto>) {
     Object.assign(this, partial);
   }

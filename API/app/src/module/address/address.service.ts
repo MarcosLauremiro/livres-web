@@ -8,14 +8,26 @@ import { Address } from './entities/address.entity';
 export class AddressService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createAddressDto: CreateAddressDto, userId: string) {
+  async create(
+    createAddressDto: CreateAddressDto,
+    userId: string,
+    eventId: string,
+    pgmId: string,
+    scheduleId: string,
+  ) {
     const address = new Address();
     Object.assign(address, {
       ...createAddressDto,
     });
 
     const newAddress = await this.prisma.address.create({
-      data: { ...address, userId: userId },
+      data: {
+        ...address,
+        user: userId ? { connect: { id: userId } } : undefined,
+        event: eventId ?  { connect: { id: eventId } } : undefined,
+        pgm: pgmId ?  { connect: { id: pgmId } } : undefined,
+        schedule: scheduleId ?  { connect: { id: scheduleId } } : undefined,
+      },
     });
 
     return newAddress;
@@ -51,7 +63,7 @@ export class AddressService {
       where: { id },
       data: { ...updateAddressDto },
     });
-    
+
     return updateAddress;
   }
 

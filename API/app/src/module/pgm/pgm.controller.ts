@@ -14,7 +14,8 @@ export class PgmController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPgmDto: CreatePgmDto, @Request() req) {
-    return this.pgmService.create(createPgmDto, req.user.id);
+    console.log("LOG ==========================>", req)
+    return this.pgmService.create(createPgmDto, req.body.userId);
   }
 
   @ApiBearerAuth()

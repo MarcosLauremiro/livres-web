@@ -20,7 +20,9 @@ export class PgmService {
   }
 
   async findAll() {
-    const pgm = await this.prisma.pgm.findMany();
+    const pgm = await this.prisma.pgm.findMany({
+      include: {address: true}
+    });
     return pgm;
   }
 
