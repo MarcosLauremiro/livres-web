@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { PgmService } from './pgm.service';
 import { CreatePgmDto } from './dto/create-pgm.dto';
 import { UpdatePgmDto } from './dto/update-pgm.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('PGM')
@@ -10,14 +20,15 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class PgmController {
   constructor(private readonly pgmService: PgmService) {}
 
+  @ApiOperation({ summary: 'Criar PGM' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPgmDto: CreatePgmDto, @Request() req) {
-    console.log("LOG ==========================>", req)
     return this.pgmService.create(createPgmDto, req.body.userId);
   }
 
+  @ApiOperation({ summary: 'Obter Todos os PGMs' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -25,6 +36,7 @@ export class PgmController {
     return this.pgmService.findAll();
   }
 
+  @ApiOperation({ summary: 'Obter PGM por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -32,6 +44,7 @@ export class PgmController {
     return this.pgmService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Atualizar PGM por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
@@ -39,6 +52,7 @@ export class PgmController {
     return this.pgmService.update(id, updatePgmDto);
   }
 
+  @ApiOperation({ summary: 'Deletar PGM por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

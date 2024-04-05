@@ -16,9 +16,17 @@ import { ScheduleModule } from './module/schedule/schedule.module';
 import { MinistryModule } from './module/ministry/ministry.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, AddressModule, PgmModule, EventModule, ScheduleModule, MinistryModule],
+  imports: [
+    UsersModule,
+    AuthModule,
+    AddressModule,
+    PgmModule,
+    EventModule,
+    ScheduleModule,
+    MinistryModule,
+  ],
   controllers: [],
-  providers: [PrismaService,JwtService],
+  providers: [PrismaService, JwtService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
@@ -27,6 +35,11 @@ export class AppModule implements NestModule {
       .forRoutes(
         { path: 'users', method: RequestMethod.GET },
         { path: 'users/:id', method: RequestMethod.POST },
+        { path: 'address/:id', method: RequestMethod.GET },
+        { path: 'schedule', method: RequestMethod.ALL },
+        { path: 'pgm', method: RequestMethod.ALL },
+        { path: 'ministry', method: RequestMethod.ALL },
+        { path: 'event', method: RequestMethod.ALL },
       );
   }
 }

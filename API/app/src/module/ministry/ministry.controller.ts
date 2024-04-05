@@ -1,8 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { MinistryService } from './ministry.service';
 import { CreateMinistryDto } from './dto/create-ministry.dto';
 import { UpdateMinistryDto } from './dto/update-ministry.dto';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Ministry')
@@ -15,9 +30,10 @@ export class MinistryController {
   @ApiResponse({ status: 400, description: 'Requisição inválida' })
   @Post()
   create(@Body() createMinistryDto: CreateMinistryDto, @Request() req) {
-    return this.ministryService.create(createMinistryDto,req.user.id);
+    return this.ministryService.create(createMinistryDto, req.body.userId);
   }
 
+  @ApiOperation({ summary: 'Obter todos os ministerios' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -25,6 +41,7 @@ export class MinistryController {
     return this.ministryService.findAll();
   }
 
+  @ApiOperation({ summary: 'Obter ministerio por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -32,13 +49,18 @@ export class MinistryController {
     return this.ministryService.findOne(id);
   }
 
+  @ApiOperation({ summary: 'Atualizar ministerio por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMinistryDto: UpdateMinistryDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateMinistryDto: UpdateMinistryDto,
+  ) {
     return this.ministryService.update(id, updateMinistryDto);
   }
 
+  @ApiOperation({ summary: 'Deletar ministerio por ID' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

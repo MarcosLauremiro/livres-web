@@ -34,7 +34,7 @@ export class AuthMiddleware implements NestMiddleware {
       }
       next();
     } catch (error) {
-      throw new UnauthorizedException('Invalid token não ta funcionando.');
+      throw new UnauthorizedException('Invalid.');
     }
   }
 }

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ScheduleService } from './schedule.service';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Schedule')
 @Controller('schedule')
@@ -10,6 +10,8 @@ export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) {}
 
   @ApiOperation({ summary: 'Criar um novo schedule' })
+  @ApiResponse({ status: 201, description: 'schedule criado com sucesso' })
+  @ApiResponse({ status: 400, description: 'Requisição inválida' })
   @Post()
   create(@Body() createScheduleDto: CreateScheduleDto) {
     return this.scheduleService.create(createScheduleDto);
