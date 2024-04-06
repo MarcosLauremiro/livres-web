@@ -35,6 +35,7 @@ model User {
   Ministry       Ministry? @relation("ministry_leader")
 }
 
+
 model Address {
   id           String    @id
   road         String
