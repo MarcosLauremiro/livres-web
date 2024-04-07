@@ -6,23 +6,18 @@ export class User {
   name: string;
   email: string;
   phone: string;
-  date_birth: string;
-  register_at: Date;
+  dateBirth: string;
   isAdmin: boolean;
-  status:boolean
-  marital_status:boolean
-  instagram: string;
-  university: boolean;
-  work: boolean;
-  baptism: boolean;
-  start_date: string;
-  
+  createdAt: Date;
+  updatedAt: Date;
+  deleteAt: Date;
 
   @Exclude()
   password: string;
 
   constructor() {
     this.id = randomUUID();
-    this.register_at = new Date();
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 }

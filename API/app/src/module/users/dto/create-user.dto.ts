@@ -1,6 +1,13 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
-import { hashSync } from "bcryptjs";
+import {
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Matches,
+} from 'class-validator';
+import { hashSync } from 'bcryptjs';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
@@ -23,61 +30,35 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
-  date_birth: string;
-
-  @ApiProperty()
-  register_at: Date;
+  dateBirth: string;
 
   @IsBoolean()
   @ApiProperty()
   isAdmin: boolean;
 
-  @IsBoolean()
   @ApiProperty()
-  status: boolean
-
-  @IsBoolean()
-  @ApiProperty()
-  marital_status: boolean
-
-  @ApiProperty()
-  @IsString()
-  instagram: string
-
-  @ApiProperty()
-  @IsBoolean()
-  university: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  work: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  baptism: boolean;
-
-  @ApiProperty()
-  @IsString()
-  start_date: string;
+  @IsOptional()
+  createdAt: Date;
 
   @ApiProperty()
   @IsOptional()
-  pgmId?: string;
+  updatedAt: Date;
 
   @ApiProperty()
   @IsOptional()
-  ministryId?: string;
+  deletedAt: Date;
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  @Transform(({value}: {value: string}) => hashSync(value, 12), {
-    groups: ['tranform']
-})
+  @Transform(({ value }: { value: string }) => hashSync(value, 12), {
+    groups: ['tranform'],
+  })
   password: string;
 
   constructor(partial: Partial<CreateUserDto>) {
     Object.assign(this, partial);
-    this.register_at = new Date();
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 }

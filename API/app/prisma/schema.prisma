@@ -15,7 +15,7 @@ model User {
   name       String
   email      String      @unique
   phone      String?
-  date_birth DateTime?
+  dateBirth DateTime?
   password   String
   isAdmin    Boolean     @default(false)
   detail     UserDetail?
@@ -36,7 +36,7 @@ model UserDetail {
   baptism           Boolean?
   start_date        String?
   gender            String?
-  emergency_contact String?
+  emergencyContact String?
   detail            String?
   description       String?
   user              User?     @relation(fields: [userId], references: [id])
