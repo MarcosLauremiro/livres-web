@@ -12,5 +12,5 @@ export class CreateMinistryDto {
 
     @ApiProperty()
     @IsString()
-    userId: string
+    leaderId: string
 }

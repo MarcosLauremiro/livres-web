@@ -14,7 +14,7 @@ export class MinistryService {
       ...createMinistryDto,
     });
     await this.prisma.ministry.create({
-      data: { ...ministry, userId: userId },
+      data: { ...ministry, leaderId: userId },
     });
   }
 

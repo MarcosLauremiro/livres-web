@@ -4,7 +4,7 @@ export class Ministry {
   readonly id: string;
   title: string;
   description: string;
-  userId: string;
+  leaderId: string;
 
   constructor() {
     this.id = randomUUID();

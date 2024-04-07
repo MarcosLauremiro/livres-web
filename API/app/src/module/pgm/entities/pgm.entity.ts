@@ -6,7 +6,7 @@ export class Pgm {
   description: string;
   time: string;
   location: string;
-  userId: string;
+  leaderId: string;
 
   constructor() {
     this.id = randomUUID();

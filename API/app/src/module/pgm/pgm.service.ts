@@ -12,24 +12,24 @@ export class PgmService {
     const pgm = new Pgm();
     Object.assign(pgm, { ...createPgmDto });
 
-    const newPgm = await this.prisma.pgm.create({
-      data: { ...pgm, userId: userId },
+    const newPgm = await this.prisma.pGM.create({
+      data: { ...pgm, leaderId: userId },
     });
 
     return newPgm;
   }
 
   async findAll() {
-    const pgm = await this.prisma.pgm.findMany({
+    const pgm = await this.prisma.pGM.findMany({
       include: {address: true}
     });
     return pgm;
   }
 
   async findOne(id: string) {
-    const pgm = await this.prisma.pgm.findUnique({
+    const pgm = await this.prisma.pGM.findUnique({
       where: { id },
-      include: {address: true, user: true}
+      include: {address: true, members: true}
     });
 
     if (!pgm) {
@@ -40,7 +40,7 @@ export class PgmService {
   }
 
   async update(id: string, updatePgmDto: UpdatePgmDto) {
-    const pgm = await this.prisma.pgm.findUnique({
+    const pgm = await this.prisma.pGM.findUnique({
       where: { id },
     });
 
@@ -48,7 +48,7 @@ export class PgmService {
       throw new NotFoundException('pgm not found');
     }
 
-    const updatePgm = await this.prisma.pgm.update({
+    const updatePgm = await this.prisma.pGM.update({
       where: { id },
       data: { ...updatePgmDto },
     });
@@ -57,7 +57,7 @@ export class PgmService {
   }
 
   async remove(id: string) {
-    const pgm = await this.prisma.pgm.findUnique({
+    const pgm = await this.prisma.pGM.findUnique({
       where: { id },
     });
 
@@ -65,7 +65,7 @@ export class PgmService {
       throw new NotFoundException('pgm not found');
     }
 
-    await this.prisma.pgm.delete({ where: { id } });
+    await this.prisma.pGM.delete({ where: { id } });
   }
 }
 
