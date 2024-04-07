@@ -28,13 +28,13 @@ model User {
 
 model UserDetail {
   id                String    @id @default(uuid())
-  marital_status    Boolean?
+  maritalStatus    Boolean?
   instagram         String?
   status            Boolean   @default(true)
   university        Boolean?
   work              Boolean?
   baptism           Boolean?
-  start_date        String?
+  startDate        String?
   gender            String?
   emergencyContact String?
   detail            String?

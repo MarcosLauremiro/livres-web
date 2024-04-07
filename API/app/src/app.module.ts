@@ -14,6 +14,7 @@ import { PgmModule } from './module/pgm/pgm.module';
 import { EventModule } from './module/event/event.module';
 import { ScheduleModule } from './module/schedule/schedule.module';
 import { MinistryModule } from './module/ministry/ministry.module';
+import { UserDetailModule } from './module/user-detail/user-detail.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MinistryModule } from './module/ministry/ministry.module';
     EventModule,
     ScheduleModule,
     MinistryModule,
+    UserDetailModule,
   ],
   controllers: [],
   providers: [PrismaService, JwtService],
