@@ -11,27 +11,26 @@ datasource db {
 }
 
 model User {
-  id            String      @id @default(uuid())
-  name          String
-  email         String      @unique
-  phone         String?
-  date_birth    DateTime?
-  password      String
-  isAdmin       Boolean     @default(false)
-  detail        UserDetail? @relation(fields: [detailId], references: [id])
-  detailId      String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime?   @updatedAt
-  deletedAt     DateTime?
+  id         String      @id @default(uuid())
+  name       String
+  email      String      @unique
+  phone      String?
+  date_birth DateTime?
+  password   String
+  isAdmin    Boolean     @default(false)
+  detail     UserDetail?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime?   @updatedAt
+  deletedAt  DateTime?
 
   @@map("user")
 }
 
 model UserDetail {
-  id                String      @id @default(uuid())
+  id                String    @id @default(uuid())
   marital_status    Boolean?
   instagram         String?
-  status            Boolean     @default(true)
+  status            Boolean   @default(true)
   university        Boolean?
   work              Boolean?
   baptism           Boolean?
@@ -40,101 +39,102 @@ model UserDetail {
   emergency_contact String?
   detail            String?
   description       String?
-  user              User        @relation(fields: [userId], references: [id])
-  userId            String
-  ledPGM            PGM?        @relation("PGMLedDetail")
-  ledMinistry       Ministry?   @relation("MinistryLedDetail")
-  pgm               PGM?        @relation("PGMMemberDetail")
-  ministry          Ministry?   @relation("MinistryMemberDetail")
-  address           Address?    @relation("UserDetailAddress")
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime?   @updatedAt
+  user              User?     @relation(fields: [userId], references: [id])
+  userId            String?   @unique
+  ledPGM            PGM?      @relation("PGMLedDetail")
+  ledMinistry       Ministry? @relation("MinistryLedDetail")
+  pgm               PGM?      @relation("PGMMemberDetail", fields: [pGMId], references: [id])
+  ministry          Ministry? @relation("MinistryMemberDetail", fields: [ministryId], references: [id])
+  address           Address?  @relation("UserDetailAddress")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime? @updatedAt
   deletedAt         DateTime?
+  pGMId             String?
+  ministryId        String?
 
   @@map("detailUsers")
 }
 
 model PGM {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String?
-  leaderDetail   UserDetail?   @relation("PGMLedDetail", fields: [leaderDetailId], references: [id])
-  leaderDetailId String?
-  members        UserDetail[]  @relation("PGMMemberDetail")
-  address        Address?      @relation(fields: [addressId], references: [id])
-  addressId      String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime?     @updatedAt
+  leaderDetail   UserDetail?  @relation("PGMLedDetail", fields: [leaderDetailId], references: [id])
+  leaderDetailId String?      @unique
+  members        UserDetail[] @relation("PGMMemberDetail")
+  address        Address?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime?    @updatedAt
   deletedAt      DateTime?
 
   @@map("PGM")
 }
 
 model Ministry {
-  id             String        @id @default(uuid())
+  id             String       @id @default(uuid())
   title          String
   description    String?
-  leaderDetail   UserDetail?   @relation("MinistryLedDetail", fields: [leaderDetailId], references: [id])
-  leaderDetailId String?
-  members        UserDetail[]  @relation("MinistryMemberDetail")
-  address        Address?      @relation(fields: [addressId], references: [id])
+  leaderDetail   UserDetail?  @relation("MinistryLedDetail", fields: [leaderDetailId], references: [id])
+  leaderDetailId String?      @unique
+  members        UserDetail[] @relation("MinistryMemberDetail")
+  address        Address?     @relation(fields: [addressId], references: [id])
   addressId      String?
-  createdAt      DateTime      @default(now())
+  createdAt      DateTime     @default(now())
   deletedAt      DateTime?
 
   @@map("Ministry")
 }
 
 model Address {
-  id               String      @id @default(uuid())
-  road             String?
-  neighborhood     String?
-  number           String?
-  complement       String?
-  userDetail       UserDetail? @relation("UserDetailAddress", fields: [userDetailId], references: [id])
-  userDetailId     String?
-  pgm              PGM?
-  event            Event?      @relation(fields: [eventId], references: [id])
-  eventId          String?
-  schedule         Schedule?   @relation(fields: [scheduleId], references: [id])
-  scheduleId       String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime?   @updatedAt
-  deletedAt        DateTime?
+  id           String      @id @default(uuid())
+  road         String?
+  neighborhood String?
+  number       String?
+  complement   String?
+  userDetail   UserDetail? @relation("UserDetailAddress", fields: [userDetailId], references: [id])
+  userDetailId String?     @unique
+  pgm          PGM?        @relation(fields: [pgmId], references: [id])
+  pgmId        String?     @unique
+  event        Event?      @relation(fields: [eventId], references: [id])
+  eventId      String?     @unique
+  schedule     Schedule?   @relation(fields: [scheduleId], references: [id])
+  scheduleId   String?     @unique
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime?   @updatedAt
+  deletedAt    DateTime?
+  Ministry     Ministry[]
 
   @@map("address")
 }
 
 model Event {
-  id               String      @id @default(uuid())
-  title            String
-  date             DateTime
-  location         String?
-  description      String?
-  address          Address?    @relation(fields: [addressId], references: [id])
-  addressId        String?
-  enrollment       Boolean     @default(false)
-  status           Boolean     @default(true)
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime?   @updatedAt
-  deletedAt        DateTime?
+  id          String    @id @default(uuid())
+  title       String
+  date        DateTime
+  location    String?
+  description String?
+  address     Address?
+  enrollment  Boolean   @default(false)
+  status      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime?
 
   @@map("Eventos")
 }
 
 model Schedule {
-  id               String      @id @default(uuid())
-  title            String
-  description      String?
-  hour             String?
-  localization     String?
-  date             DateTime?
-  target_audience  String?
-  address          Address?    @relation(fields: [addressId], references: [id])
-  addressId        String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime?   @updatedAt
-  deletedAt        DateTime?
+  id              String    @id @default(uuid())
+  title           String
+  description     String?
+  hour            String?
+  localization    String?
+  date            DateTime?
+  target_audience String?
+  address         Address?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime? @updatedAt
+  deletedAt       DateTime?
 
   @@map("schedule")
 }
