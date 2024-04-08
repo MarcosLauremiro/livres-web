@@ -14,6 +14,8 @@ export class UserDetail {
   details?: string;
   description?: string;
   userId?: string;
+  PGMId?: string;
+  ministryId?: string;
   createdAt: Date = new Date();
   updatedAt?: Date;
   deletedAt?: Date;
