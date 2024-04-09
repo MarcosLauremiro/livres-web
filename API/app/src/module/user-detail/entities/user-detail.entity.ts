@@ -11,16 +11,16 @@ export class UserDetail {
   startDate?: string;
   gender?: string;
   emegencyContact?: string;
-  details?: string;
+  detail?: string;
   description?: string;
-  userId?: string;
+  userId: string;
   PGMId?: string;
   ministryId?: string;
+
   createdAt: Date = new Date();
   updatedAt?: Date;
   deletedAt?: Date;
-  constructor(partial: Partial<UserDetail>) {
-    Object.assign(this, partial);
+  constructor() {
     this.id = randomUUID();
   }
 }

@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsDate,
-  IsNotEmpty,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -65,7 +64,6 @@ export class CreateUserDetailDto {
 
   @ApiProperty()
   @IsString()
-  @IsOptional()
   userId: string;
 
   @ApiProperty()
@@ -76,12 +74,12 @@ export class CreateUserDetailDto {
   @ApiProperty()
   @IsString()
   @IsOptional()
-  ministryId: string;
+  ministryId?: string;
 
   @ApiProperty()
   @IsDate()
   @IsOptional()
-  createdAt: Date;
+  createdAt?: Date;
 
   @ApiProperty()
   @IsDate()

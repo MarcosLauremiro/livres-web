@@ -1,11 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDetailDto } from './dto/create-user-detail.dto';
 import { UpdateUserDetailDto } from './dto/update-user-detail.dto';
+import { UserDetail } from './entities/user-detail.entity';
+import { PrismaService } from 'database/prisma.service';
 
 @Injectable()
 export class UserDetailService {
-  create(createUserDetailDto: CreateUserDetailDto) {
-    return 'This action adds a new userDetail';
+  constructor(private prisma: PrismaService) {}
+  async create(
+    createUserDetailDto: CreateUserDetailDto, userId: string,
+  ) {
+    const userDetail = new UserDetail();
+    Object.assign(userDetail, {
+      ...createUserDetailDto, userId,
+    });
+    await this.prisma.userDetail.create({
+      data: { ...userDetail, userId: userId},
+    });
   }
 
   findAll() {

@@ -11,17 +11,17 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
-  name      String
-  email     String      @unique
-  phone     String?
-  dateBirth DateTime?
-  password  String
-  isAdmin   Boolean     @default(false)
-  detail    UserDetail?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime?   @updatedAt
-  deletedAt DateTime?
+  id         String      @id @default(uuid())
+  name       String
+  email      String      @unique
+  phone      String?
+  dateBirth  DateTime?
+  password   String
+  isAdmin    Boolean     @default(false)
+  userDetail UserDetail?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime?   @updatedAt
+  deletedAt  DateTime?
 
   @@map("user")
 }
@@ -41,16 +41,17 @@ model UserDetail {
   description      String?
   user             User?     @relation(fields: [userId], references: [id])
   userId           String?   @unique
-  ledPGM           PGM?      @relation("PGMLedDetail")
-  ledMinistry      Ministry? @relation("MinistryLedDetail")
-  pgm              PGM?      @relation("PGMMemberDetail", fields: [PGMId], references: [id])
-  ministry         Ministry? @relation("MinistryMemberDetail", fields: [ministryId], references: [id])
-  address          Address?  @relation("UserDetailAddress")
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime? @updatedAt
-  deletedAt        DateTime?
+  ledPGM           PGM?      @relation("PGMLed")
+  ledMinistry      Ministry? @relation("MinistryLed")
+  pgm              PGM?      @relation("PGMMember", fields: [PGMId], references: [id])
   PGMId            String?
+  ministry         Ministry? @relation("MinistryMember", fields: [ministryId], references: [id])
   ministryId       String?
+  address          Address?  @relation("UserAddress")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
 
   @@map("detailUsers")
 }
@@ -59,9 +60,9 @@ model PGM {
   id          String       @id @default(uuid())
   title       String
   description String?
-  leader      UserDetail?  @relation("PGMLedDetail", fields: [leaderId], references: [id])
+  leader      UserDetail?  @relation("PGMLed", fields: [leaderId], references: [id])
   leaderId    String?      @unique
-  members     UserDetail[] @relation("PGMMemberDetail")
+  members     UserDetail[] @relation("PGMMember")
   address     Address?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime?    @updatedAt
@@ -74,9 +75,9 @@ model Ministry {
   id          String       @id @default(uuid())
   title       String
   description String?
-  leader      UserDetail?  @relation("MinistryLedDetail", fields: [leaderId], references: [id])
+  leader      UserDetail?  @relation("MinistryLed", fields: [leaderId], references: [id])
   leaderId    String?      @unique
-  members     UserDetail[] @relation("MinistryMemberDetail")
+  members     UserDetail[] @relation("MinistryMember")
   address     Address?     @relation(fields: [addressId], references: [id])
   addressId   String?
   createdAt   DateTime     @default(now())
@@ -91,8 +92,8 @@ model Address {
   neighborhood String?
   number       String?
   complement   String?
-  userDetail   UserDetail? @relation("UserDetailAddress", fields: [userDetailId], references: [id])
-  userDetailId String?     @unique
+  user         UserDetail? @relation("UserAddress", fields: [userId], references: [id])
+  userId       String?     @unique
   pgm          PGM?        @relation(fields: [pgmId], references: [id])
   pgmId        String?     @unique
   event        Event?      @relation(fields: [eventId], references: [id])
