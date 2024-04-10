@@ -70,7 +70,18 @@ export class UserDetailService {
     return updateUserDetail;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} userDetail`;
+  async remove(id: string) {
+    const userDetail = await this.prisma.userDetail.findUnique({
+      where: { id },
+    });
+
+    if (!userDetail) {
+      throw new NotFoundException('User not found.');
+    }
+
+    await this.prisma.userDetail.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 }
