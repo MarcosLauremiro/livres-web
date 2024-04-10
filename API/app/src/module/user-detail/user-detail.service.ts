@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDetailDto } from './dto/create-user-detail.dto';
 import { UpdateUserDetailDto } from './dto/update-user-detail.dto';
 import { UserDetail } from './entities/user-detail.entity';
@@ -8,27 +8,66 @@ import { PrismaService } from 'database/prisma.service';
 export class UserDetailService {
   constructor(private prisma: PrismaService) {}
   async create(
-    createUserDetailDto: CreateUserDetailDto, userId: string,
+    createUserDetailDto: CreateUserDetailDto,
+    userId: string,
+    pgmId: string,
+    ministryId: string,
   ) {
     const userDetail = new UserDetail();
     Object.assign(userDetail, {
-      ...createUserDetailDto, userId,
+      ...createUserDetailDto,
+      userId,
     });
     await this.prisma.userDetail.create({
-      data: { ...userDetail, userId: userId},
+      data: {
+        ...userDetail,
+        user: userId ? { connect: { id: userId } } : undefined,
+        pgm: pgmId ? { connect: { id: pgmId } } : undefined,
+        ministry: ministryId ? { connect: { id: ministryId } } : undefined,
+      },
     });
   }
 
-  findAll() {
-    return `This action returns all userDetail`;
+  async findAll() {
+    return await this.prisma.userDetail.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userDetail`;
+  findOne(id: string) {
+    const userDetail = this.prisma.userDetail.findUnique({ where: { id } });
+
+    if (!userDetail) {
+      throw new NotFoundException('User not found.');
+    }
+
+    return userDetail;
   }
 
-  update(id: number, updateUserDetailDto: UpdateUserDetailDto) {
-    return `This action updates a #${id} userDetail`;
+  async update(
+    id: string,
+    updateUserDetailDto: UpdateUserDetailDto,
+    userId: string,
+    pgmId: string,
+    ministryId: string,
+  ) {
+    const userDetail = await this.prisma.userDetail.findUnique({
+      where: { id },
+    });
+
+    if (!userDetail) {
+      throw new NotFoundException('User not found.');
+    }
+
+    const updateUserDetail = await this.prisma.userDetail.update({
+      where: { id },
+      data: {
+        ...updateUserDetailDto,
+        user: userId ? { connect: { id: userId } } : undefined,
+        pgm: pgmId ? { connect: { id: pgmId } } : undefined,
+        ministry: ministryId ? { connect: { id: ministryId } } : undefined,
+      },
+    });
+
+    return updateUserDetail;
   }
 
   remove(id: number) {

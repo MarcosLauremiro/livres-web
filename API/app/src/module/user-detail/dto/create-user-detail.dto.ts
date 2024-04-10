@@ -25,7 +25,7 @@ export class CreateUserDetailDto {
   @ApiProperty()
   @IsBoolean()
   @IsOptional()
-  university: Boolean;
+  university: boolean;
 
   @ApiProperty()
   @IsBoolean()
@@ -33,9 +33,9 @@ export class CreateUserDetailDto {
   work: boolean;
 
   @ApiProperty()
-  @IsString()
+  @IsBoolean()
   @IsOptional()
-  baptism: string;
+  baptism: boolean;
 
   @ApiProperty()
   @IsString()
@@ -64,17 +64,18 @@ export class CreateUserDetailDto {
 
   @ApiProperty()
   @IsString()
-  userId: string;
+  @IsOptional()
+  user: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  PGMId: string;
+  PGM: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
-  ministryId?: string;
+  ministry?: string;
 
   @ApiProperty()
   @IsDate()

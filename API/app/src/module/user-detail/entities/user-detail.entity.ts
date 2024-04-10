@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 
 export class UserDetail {
   readonly id: string;
-  maritalStatus?: string;
+  maritalStatus?: boolean;
   instagram?: string;
   status?: boolean;
   university?: boolean;
@@ -13,14 +13,15 @@ export class UserDetail {
   emegencyContact?: string;
   detail?: string;
   description?: string;
-  userId: string;
-  PGMId?: string;
-  ministryId?: string;
+  user?: string;
+  PGM?: string;
+  ministry?: string;
 
   createdAt: Date = new Date();
   updatedAt?: Date;
   deletedAt?: Date;
   constructor() {
     this.id = randomUUID();
+    this.createdAt = new Date();
   }
 }

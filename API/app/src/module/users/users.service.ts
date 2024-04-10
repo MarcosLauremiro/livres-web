@@ -33,7 +33,7 @@ export class UsersService {
 
   async findAll() {
     const findUser = await this.prisma.user.findMany({
-      include: { detail: true},
+      include: { userDetail: true },
     });
     return plainToInstance(User, findUser);
   }
@@ -52,7 +52,7 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
-      include: { detail: true},
+      include: { userDetail: true },
     });
 
     return plainToInstance(User, user);
@@ -80,6 +80,9 @@ export class UsersService {
       throw new NotFoundException('User not found.');
     }
 
-    await this.prisma.user.delete({ where: { id } });
+    await this.prisma.user.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 }
